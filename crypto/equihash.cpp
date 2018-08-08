@@ -18,12 +18,13 @@
 
 #include "crypto/common.h"
 #include "crypto/equihash.h"
+#include "util.h"
+
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>
 
 #include <boost/optional.hpp>
-#include "../util.h"
 
 EhSolverCancelledException solver_cancelled;
 
@@ -33,7 +34,10 @@ int Equihash<N,K>::InitialiseState(eh_HashState& base_state)
     uint32_t le_N = htole32(N);
     uint32_t le_K = htole32(K);
     unsigned char personalization[crypto_generichash_blake2b_PERSONALBYTES] = {};
-    memcpy(personalization, "ZcashPoW", 8);
+    if(N==144 && K==5)
+        memcpy(personalization, "AsofePow", 8);
+    else
+        memcpy(personalization, "ZcashPoW", 8);
     memcpy(personalization+8,  &le_N, 4);
     memcpy(personalization+12, &le_K, 4);
     return crypto_generichash_blake2b_init_salt_personal(&base_state,
@@ -718,13 +722,10 @@ invalidsolution:
 }
 #endif // ENABLE_MINING
 
-
-
 template<unsigned int N, unsigned int K>
 bool Equihash<N,K>::IsValidSolution(const eh_HashState& base_state, std::vector<unsigned char> soln)
 {
-
-	if (soln.size() != SolutionWidth) {
+    if (soln.size() != SolutionWidth) {
         LogPrint("pow", "Invalid solution length: %d (expected %d)\n",
                  soln.size(), SolutionWidth);
         return false;

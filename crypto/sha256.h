@@ -8,7 +8,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-
 /** A hasher class for SHA-256. */
 class CSHA256
 {
