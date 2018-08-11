@@ -33,7 +33,7 @@
 #endif
 
 #if defined(NDEBUG)
-# error "Asofe cannot be compiled without assertions."
+# error "Zcash cannot be compiled without assertions."
 #endif
 
 uint16_t static inline ReadLE16(const unsigned char* ptr)
