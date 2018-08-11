@@ -56,11 +56,11 @@ void Verify(const v8::FunctionCallbackInfo<Value>& args) {
   return;
   }
 
-  if (!args[4]->IsString()) {
-  isolate->ThrowException(Exception::TypeError(
-    String::NewFromUtf8(isolate, "Invalid equihash personalization strings (pers)")));
-  return;
-  }
+//  if (!args[4]->IsString()) {
+//  isolate->ThrowException(Exception::TypeError(
+//    String::NewFromUtf8(isolate, "Invalid equihash personalization strings (pers)")));
+//  return;
+//  }
 
   Local<Object> header = args[0]->ToObject();
   Local<Object> solution = args[1]->ToObject();
