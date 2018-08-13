@@ -29,7 +29,7 @@
     "bindings": "*",
     "libsodium": "^0.7.3",
     "nan": "*",
-    "node-gyp": "*"
+    "node-gyp": "^3.8.0"
   },
   "engines": {
     "node": ">=0.12"

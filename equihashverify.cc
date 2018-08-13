@@ -23,8 +23,6 @@ int verifyEH(const char *hdr, const std::vector<unsigned char> &soln, unsigned i
   bool isValid;
   if (n == 200 && k == 9) {
       isValid = Eh200_9.IsValidSolution(state, soln);
-  } else if (n == 192 && k == 7) {
-      isValid = Eh192_7.IsValidSolution(state, soln);
   } else if (n == 144 && k == 5) {
       isValid = Eh144_5.IsValidSolution(state, soln);
   } else if (n == 96 && k == 5) {
@@ -56,11 +54,11 @@ void Verify(const v8::FunctionCallbackInfo<Value>& args) {
   return;
   }
 
-//  if (!args[4]->IsString()) {
-//  isolate->ThrowException(Exception::TypeError(
-//    String::NewFromUtf8(isolate, "Invalid equihash personalization strings (pers)")));
-//  return;
-//  }
+  if (!args[4]->IsString()) {
+  isolate->ThrowException(Exception::TypeError(
+    String::NewFromUtf8(isolate, "Invalid equihash personalization strings (pers)")));
+  return;
+  }
 
   Local<Object> header = args[0]->ToObject();
   Local<Object> solution = args[1]->ToObject();
