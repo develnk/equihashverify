@@ -438,11 +438,11 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(NULL, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "Zcash";
+    const char* pszModule = "Asofe";
 #endif
     if (pex)
         return strprintf(
-                "EXCEPTION: %s       \n%s in %s       \n", pex->what(), pszModule, pszThread);
+                "EXCEPTION: %s       \n%s       \n%s in %s       \n", typeid(*pex).name(), pex->what(), pszModule, pszThread);
     else
         return strprintf(
                 "UNKNOWN EXCEPTION       \n%s in %s       \n", pszModule, pszThread);
