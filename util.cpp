@@ -442,7 +442,7 @@ static std::string FormatException(const std::exception* pex, const char* pszThr
 #endif
     if (pex)
         return strprintf(
-                "EXCEPTION: %s       \n%s       \n%s in %s       \n", typeid(*pex).name(), pex->what(), pszModule, pszThread);
+                "EXCEPTION: %s       \n%s in %s       \n", pex->what(), pszModule, pszThread);
     else
         return strprintf(
                 "UNKNOWN EXCEPTION       \n%s in %s       \n", pszModule, pszThread);
